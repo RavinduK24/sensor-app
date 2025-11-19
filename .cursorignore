@@ -1,0 +1,8 @@
+backend/venv
+backend/__pycache__
+DEMO_GUIDE.md
+QUICKSTART.md
+TESTING_CHECKLIST.md
+*.txt
+*.ipynb
+to-do-list

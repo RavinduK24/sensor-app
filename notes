@@ -1,0 +1,10 @@
+- catalog of availabile house for sale
+
+Sample rate for temperature and humidity 10min
+sample rate for air qualiy -
+    1-10 second for real time monitor
+    5-10minute averages for long term analysis
+
+sound sensor reported at intervals of 250 milliseconds to 1 second. 
+
+light sensor sampling interval of once every 1-10 minutes 
