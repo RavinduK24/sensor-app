@@ -116,6 +116,11 @@ class SensorSimulator:
     def __init__(self):
         self.running = False
         self.last_readings = {}  # Store last reading time for each property and sensor type
+        self.last_real_ingestion = {} # Store timestamp of last real ingestion per property
+
+    def record_real_ingestion(self, property_id: int):
+        """Record that a real reading was received for this property"""
+        self.last_real_ingestion[property_id] = datetime.now().timestamp()
         
     def is_day_time(self) -> bool:
         """Check if current time is day (6 AM to 6 PM) or night using GMT+8"""
@@ -173,6 +178,11 @@ class SensorSimulator:
                 properties = db.query(Property).all()
                 
                 for property in properties:
+                    # Check if we have received real data recently (within last 60 seconds)
+                    last_real = self.last_real_ingestion.get(property.id, 0)
+                    if current_time - last_real < 60:
+                        continue # Skip simulation for this property, prefer real data
+
                     for sensor_type in SensorType:
                         # Check if it's time to generate a reading for this property's sensor
                         time_since_last = current_time - self.last_readings[property.id][sensor_type]

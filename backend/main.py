@@ -184,6 +184,9 @@ def ingest_realtime_reading(
     db.commit()
     db.refresh(reading)
 
+    # Notify simulator that real data was received for this property
+    simulator.record_real_ingestion(payload.property_id)
+
     return {
         "id": reading.id,
         "property_id": reading.property_id,
