@@ -10,6 +10,7 @@ from database import engine, get_db, Base
 from models import Property as PropertyModel, CustomerProfile as CustomerProfileModel, SensorReading, SensorType, RealtimeReading, HistoricalReading
 import schemas
 from data_aggregator import aggregator
+from sensor_simulator import simulator
 from comfort_evaluator import ComfortEvaluator
 from datetime import datetime, timedelta, date, timezone
 from collections import defaultdict
@@ -73,6 +74,8 @@ async def startup_event():
         db.close()
     # Start data aggregator in background
     asyncio.create_task(aggregator.aggregate_and_migrate())
+    # Start sensor simulator in background
+    asyncio.create_task(simulator.simulate_sensors())
 
 @app.get("/")
 def read_root():

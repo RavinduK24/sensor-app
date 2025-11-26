@@ -103,6 +103,14 @@ class SensorSimulator:
             "aq": (12, 18),
             "sound_day": (70, 80), "sound_night": (40, 45)
         },
+        # Property 11 (Smart Home IoT) - Ideal conditions
+        {
+            "temp_day": (21.5, 22.5), "temp_night": (21, 22),
+            "humidity": (42, 48),
+            "light_day": (600, 800), "light_night": (0, 20),
+            "aq": (2, 5),
+            "sound_day": (30, 40), "sound_night": (25, 30)
+        },
     ]
     
     def __init__(self):
@@ -153,7 +161,7 @@ class SensorSimulator:
         
         # Initialize last reading times per property and sensor type
         # Set to 0 to force immediate generation on first run
-        for property_id in range(1, 11):
+        for property_id in range(1, 12):
             self.last_readings[property_id] = {}
             for sensor_type in SensorType:
                 self.last_readings[property_id][sensor_type] = 0
